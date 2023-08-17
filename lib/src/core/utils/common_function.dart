@@ -1,7 +1,7 @@
-
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
+import 'package:weatherapp/src/core/utils/toast_utils.dart';
 import 'package:weatherapp/src/data/model/weather_model/lat_lng.dart';
 
 DateTime stringToDateTime(String dateTime) {
@@ -68,7 +68,12 @@ String getDayDateAndMonFomString(String date) {
 
 Future<Position?> getCurrentLocation() async {
   try {
-    final LocationPermission permission = await Geolocator.requestPermission();
+    LocationPermission permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.deniedForever) {
+      ToastUtils.showToast(
+          "Location permission has been denied forever. Please change it from app settings.",
+          ToastType.SUCCESS);
+    }
     if (permission == LocationPermission.always ||
         permission == LocationPermission.whileInUse) {
       Position position = await Geolocator.getCurrentPosition(

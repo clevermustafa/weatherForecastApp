@@ -9,7 +9,7 @@ import 'package:weatherapp/src/presentation/feature/weather_provider.dart';
 import 'package:weatherapp/src/presentation/pages/weather_page/widgets/weather_detail_widget.dart';
 import 'package:weatherapp/src/presentation/pages/weather_page/widgets/weather_empty.dart';
 import 'package:weatherapp/src/presentation/pages/weather_page/widgets/weather_loading.dart';
-import 'package:weatherapp/src/presentation/pages/weather_page/widgets/weather_search_button.dart';
+import 'package:weatherapp/src/presentation/pages/weather_page/widgets/weather_search_dialog.dart';
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
@@ -58,7 +58,7 @@ class _WeatherPageState extends State<WeatherPage> {
                   Expanded(
                     child: Provider.of<WeatherProvider>(context).weatherModel ==
                             null
-                        ? const WeatherEmpty()
+                        ? WeatherEmpty()
                         : CustomScrollView(
                             // crossAxisAlignment: CrossAxisAlignment.start,
                             slivers: [
